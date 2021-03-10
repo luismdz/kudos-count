@@ -1,0 +1,16 @@
+<div class="selector-container d-flex flex-column justify-content-center align-items-center align-items-md-start w-100">
+  <h2 class="display-4">Miembros a participar</h2>
+
+  <form [formGroup]="form"
+    class="d-flex flex-column w-100 px-lg-0"
+    (ngSubmit)="onSubmit()">
+
+    <textarea name="participantes"
+      placeholder="Ingrese los nombres de los participantes..."
+      class="form-control"
+      formControlName="participantes"></textarea>
+
+    <button class="btn btn-outline-primary btn-block"
+      [disabled]="form.invalid">Contar Kudos</button>
+  </form>
+</div>

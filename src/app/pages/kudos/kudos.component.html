@@ -1,0 +1,32 @@
+<div class="votacion">
+  <div class="row h-100">
+
+    <!-- <div class="codigo col-12 d-flex align-items-center justify-content-center mt-2 mb-5">
+      <h5>Código: </h5>
+      <span>
+        {{ votacion?.codigo || 0 }}
+      </span>
+    </div> -->
+
+    <div class="participantes-container col-lg-4 col-md-5 col-sm-12 mb-5">
+      <app-listado-participantes [participantes]="participantes"
+        (agregarNuevo)="recibirNuevoParticipante($event)"
+        (eliminar)="eliminarParticipante($event)"
+        (voto)="recibirVoto()"></app-listado-participantes>
+    </div>
+
+    <div class="col-lg-8 col-md-7 col-sm-12 grafico">
+      <grafico-barras-horizontal [datos]="datosGrafico"
+        class="flex-grow-1"></grafico-barras-horizontal>
+
+      <div class="finalizar">
+        <button class="btn btn-outline-success btn-block my-5 w-100"
+          type="button"
+          (click)="finalizarVotacion()">
+          Finalizar
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

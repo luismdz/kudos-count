@@ -1,0 +1,66 @@
+<div class="buscador mb-4">
+
+  <form [formGroup]="formAgregar"
+    (ngSubmit)="agregarParticipante()">
+
+    <div class="form-group">
+      <label for="participante">Agregar Participante</label>
+      <div class="d-flex">
+        <input type="text"
+          class="form-control mr-2"
+          id="participante"
+          placeholder="Ex. Joe"
+          formControlName="participante"
+          (input)="firstLetterToUpper()">
+        <button class="btn btn-primary"
+          [disabled]="formAgregar.invalid">
+          Agregar
+        </button>
+      </div>
+    </div>
+
+  </form>
+
+  <form [formGroup]="formBuscador"
+    autocomplete="off">
+
+    <div class="form-group">
+      <label for="nombre">Buscar participante</label>
+      <input type="text"
+        class="form-control"
+        id="nombre"
+        placeholder="Ex. Joe"
+        formControlName="nombre">
+    </div>
+
+  </form>
+
+</div>
+
+<div class="listado">
+  <h3 class="font-weight-light">Participantes</h3>
+  <ul class="list-group w-100 mt-3"
+    *ngIf="participantes.length > 0">
+
+    <li class="list-group-item d-flex justify-content-between align-items-center"
+      *ngFor="let participante of participantes">
+      <span>{{ participante.nombre }}</span>
+
+      <div class="act d-flex justify-content-end ml-2">
+        <button class="btn btn-outline-primary"
+          type="button"
+          (click)="votar(participante)">
+          Votar
+        </button>
+
+        <button class="btn btn-outline-danger ml-3"
+          type="button"
+          (click)="eliminarParticipante(participante)">
+          <i class="far fa-trash-alt"></i>
+        </button>
+      </div>
+
+    </li>
+
+  </ul>
+</div>

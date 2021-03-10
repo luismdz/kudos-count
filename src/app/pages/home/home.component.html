@@ -1,0 +1,42 @@
+<div class="home-container">
+  <div class="wave-container">
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 320">
+      <path fill="#fff"
+        fill-opacity="1"
+        d="M0,0L48,5.3C96,11,192,21,288,37.3C384,53,480,75,576,117.3C672,160,768,224,864,256C960,288,1056,288,1152,282.7C1248,277,1344,267,1392,261.3L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+      </path>
+    </svg>
+  </div>
+
+  <div class="main-text">
+    <p>
+      Los Kudos son reconocimiento escrito y público de una colega por algo que ha contribuido al equipo.
+    </p>
+    <a href="http://giovannycifuentes.com/kudos-reconocimientos-entre-companeros-de-trabajo/"
+      target="_blank"
+      class="btn btn-outline-light">
+      Conoce más
+    </a>
+  </div>
+
+  <div class="
+      selector-container
+      d-flex
+      flex-column
+      align-items-md-start">
+
+    <h2>Realice una nueva votación</h2>
+
+    <selector-participantes class="selector"
+      (participantesElegidos)="obtenerParticipantes($event)">
+    </selector-participantes>
+
+  </div>
+
+  <div class="img d-md-block">
+    <img src="assets/img/kudo-2.png"
+      alt="Kudos">
+  </div>
+
+</div>

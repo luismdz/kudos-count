@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "auth-everyting": {
+      "hosting": {
+        "kudos-count-app": [
+          "auth-everyting"
+        ]
+      }
+    }
+  }
+}

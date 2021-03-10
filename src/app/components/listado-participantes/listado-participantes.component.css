@@ -1,0 +1,23 @@
+.buscador>form {
+  width: 100%;
+  max-width: 350px;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.listado {
+  width: 100%;
+  max-width: 350px;
+}
+
+/* .listado ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.listado ul li {
+  border-top-width: 1px;
+  border-radius: 0;
+} */

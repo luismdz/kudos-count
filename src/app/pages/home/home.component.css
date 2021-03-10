@@ -1,0 +1,174 @@
+.home-container {
+  height: auto;
+  display: grid;
+  grid-template-columns: 400px auto;
+  grid-template-rows: 1fr auto;
+}
+
+.main-text {
+  max-width: 100%;
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.main-text p {
+  font-family: var(--open-sans);
+  font-size: 2rem;
+  font-weight: 600;
+  color: #f4f4f4;
+  max-width: 450px;
+}
+
+.main-text a {
+  margin-right: 2rem;
+}
+
+.selector-container {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.selector {
+  width: 100%;
+  max-width: 350px;
+}
+
+.img {
+  grid-column: 2;
+  grid-row: 2;
+  width: 500px;
+  height: auto;
+  margin: auto;
+}
+
+.img img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+h2 {
+  font-family: var(--open-sans);
+  font-size: 26px;
+  font-weight: bold;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.wave-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0px;
+  width: 100vw;
+  height: 75vh;
+  min-height: 500px;
+  background: #0099ff;
+  text-align: center;
+  overflow: hidden;
+  z-index: -100;
+  border-bottom: white;
+  background-image: url('/assets/img/circuit-pattern.png');
+  background-position: center/center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+svg {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+@media (max-width:1100px) {
+
+  .wave-container {
+    background-image: none;
+    height: 35vh;
+  }
+
+}
+
+@media (max-width:992px) {
+
+  .wave-container {
+    background-image: none;
+    height: 40vh;
+    min-height: 450px;
+  }
+
+  .main-text {
+    justify-self: center;
+    grid-column: span 2;
+  }
+
+}
+
+@media (max-width:780px) {
+
+  .wave-container {
+    height: 30vh;
+    min-height: 400px;
+  }
+
+  .home-container {
+    grid-template-columns: 1fr;
+  }
+
+  .main-text {
+    grid-column: 1;
+  }
+
+  .main-text p {
+    font-size: 1.7rem;
+  }
+
+  .img {
+    display: none;
+  }
+
+  .img img {
+    display: none;
+  }
+
+  .selector-container {
+    justify-self: center;
+    margin-top: 3rem;
+  }
+
+}
+
+@media (max-width:475px) {
+
+  .home-container {
+    display: block;
+  }
+
+  .wave-container {
+    height: 370px;
+    min-height: 350px;
+  }
+
+  .main-text {
+    max-width: 100%;
+  }
+
+  .main-text p {
+    font-size: 1.4rem;
+    margin-top: 1rem;
+  }
+
+  .selector-container {
+    display: block;
+  }
+
+  .selector-container h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+}
