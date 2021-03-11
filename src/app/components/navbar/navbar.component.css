@@ -22,9 +22,9 @@
 }
 
 .container-fluid {
-  margin: .25rem 0;
+  margin: .25rem auto;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
 }
 
 .navbar-collapse {

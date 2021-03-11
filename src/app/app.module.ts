@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { KudosComponent } from './pages/kudos/kudos.component';
 import { environment } from '../environments/environment';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, KudosComponent],
@@ -20,9 +20,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     BrowserAnimationsModule,
     ComponentsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(
+      environment.firebase,
+      'angular-auth-firebase'
+    ),
     AngularFirestoreModule,
-    FontAwesomeModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

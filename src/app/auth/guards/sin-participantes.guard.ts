@@ -7,7 +7,7 @@ import {
   CanDeactivate,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { KudosService } from '../services/kudos.service';
+import { KudosService } from '../../services/kudos.service';
 import Swal from 'sweetalert2';
 
 @Injectable({

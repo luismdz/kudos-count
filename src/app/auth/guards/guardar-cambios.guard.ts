@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { KudosService } from '../services/kudos.service';
+import { KudosService } from '../../services/kudos.service';
 import { map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
