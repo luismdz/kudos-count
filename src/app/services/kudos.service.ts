@@ -153,6 +153,7 @@ export class KudosService {
 
     if (fechaActual > new Date(expiracion)) {
       localStorage.removeItem('kudos');
+      this.kudosDoc.doc(id).delete();
       return null;
     }
 
@@ -183,7 +184,7 @@ export class KudosService {
 
   private guardarVotacionActualEnLS(votacion: Votacion) {
     const date = new Date();
-    const expiracion = date.setHours(date.getHours() + 6);
+    const expiracion = date.setHours(date.getHours() + 12);
     localStorage.setItem('kudos', JSON.stringify({ ...votacion, expiracion }));
   }
 }
