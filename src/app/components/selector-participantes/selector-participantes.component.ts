@@ -28,7 +28,7 @@ export class SelectorParticipantesComponent {
 
     this.participantes = participantesArr
       .filter((x: string) => x !== '')
-      .map((nombre: string) => ({ nombre, votos: 0 }));
+      .map((nombre: string, index: number) => ({ id: index, nombre, votos: 0, mensajes: [] }));
 
     this.participantesElegidos.emit(this.participantes);
   }

@@ -6,15 +6,17 @@ import {
   UrlTree,
   CanDeactivate,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { KudosService } from '../../services/kudos.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SinParticipantesGuard implements CanActivate {
-  constructor(private kudosSvc: KudosService) {}
+  constructor(private kudosSvc: KudosService, private router: Router) {}
 
   private toast = Swal.mixin({
     toast: true,
@@ -32,20 +34,39 @@ export class SinParticipantesGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const votacionActualExiste = this.kudosSvc.validarVotacionExistente();
-
     const existenParticipantes =
       this.kudosSvc.participantes && this.kudosSvc.participantes.length > 0;
 
-    if (votacionActualExiste || existenParticipantes) {
-      return true;
-    }
+    const sorteoExistente = this.kudosSvc.validarVotacionExistente();
 
-    return this.toast
-      .fire({
-        title: 'Debe iniciar un nuevo sorteo',
-        icon: 'error',
+    const sub = combineLatest([
+      this.kudosSvc.codigoExiste$,
+      this.kudosSvc.finalizado$,
+    ]).pipe(
+      map((resp) => {
+        const [ingresoPorCodigo, votacionFinalizada] = resp;
+
+        if (
+          existenParticipantes ||
+          ingresoPorCodigo ||
+          votacionFinalizada ||
+          sorteoExistente
+        ) {
+          return true;
+        }
+
+        this.toast
+          .fire({
+            title: 'Debe iniciar un nuevo sorteo',
+            icon: 'error',
+          })
+          .then(() => {
+            this.router.navigateByUrl('/home');
+            return false;
+          });
       })
-      .then(() => false);
+    );
+
+    return sub;
   }
 }

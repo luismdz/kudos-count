@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { GraficoBarrasHorizontalComponent } from './grafico-barras-horizontal/grafico-barras-horizontal.component';
@@ -16,7 +16,13 @@ import { ListadoParticipantesComponent } from './listado-participantes/listado-p
     SelectorParticipantesComponent,
     ListadoParticipantesComponent,
   ],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, NgxChartsModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxChartsModule,
+  ],
   exports: [
     GraficoBarrasHorizontalComponent,
     NavbarComponent,

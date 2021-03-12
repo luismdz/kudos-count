@@ -1,18 +1,18 @@
 <div class="votacion">
-  <div class="row h-100">
+  <div class="row">
 
-    <!-- <div class="codigo col-12 d-flex align-items-center justify-content-center mt-2 mb-5">
+    <div class="codigo col-12 d-flex align-items-center justify-content-center mt-2 mb-2">
       <h5>Código: </h5>
       <span>
-        {{ votacion?.codigo || 0 }}
+        {{ votacion?.codigo || '' }}
       </span>
-    </div> -->
+    </div>
 
     <div class="participantes-container col-lg-4 col-md-5 col-sm-12 mb-5">
       <app-listado-participantes [participantes]="participantes"
         (agregarNuevo)="recibirNuevoParticipante($event)"
         (eliminar)="eliminarParticipante($event)"
-        (voto)="recibirVoto()"></app-listado-participantes>
+        (voto)="recibirVoto($event)"></app-listado-participantes>
     </div>
 
     <div class="col-lg-8 col-md-7 col-sm-12 grafico">

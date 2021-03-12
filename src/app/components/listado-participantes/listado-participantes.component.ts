@@ -14,8 +14,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { debounceTime, startWith, take } from 'rxjs/operators';
 import { firstLetterToUpperCase } from '../../utilidades';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listado-participantes',
@@ -23,12 +23,13 @@ import { firstLetterToUpperCase } from '../../utilidades';
   styleUrls: ['./listado-participantes.component.css'],
 })
 export class ListadoParticipantesComponent implements OnInit, OnChanges {
-  @Input() participantes: Participante[] = [];
+  @Input() participantes: Participante[];
   @Output() agregarNuevo = new EventEmitter<Participante>();
   @Output() voto = new EventEmitter<Participante>();
   @Output() eliminar = new EventEmitter<Participante>();
 
   private participantesOriginal = [];
+  mensajes = '';
   formBuscador: FormGroup;
   formAgregar: FormGroup;
 
@@ -39,6 +40,8 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
   get nombreBuscado() {
     return this.formBuscador.get('nombre');
   }
+
+  mensaje = '';
 
   constructor(private fb: FormBuilder) {
     this.formBuscador = this.fb.group({
@@ -60,7 +63,7 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.participantes = changes.participantes.currentValue;
-    this.participantesOriginal = this.participantes;
+    this.participantesOriginal = this.participantes.slice();
     // Top 10 mas votados
     this.participantes = this.participantes.slice(0, 10);
   }
@@ -96,23 +99,52 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
     this.agregarNuevo.emit({
       nombre: participante,
       votos: 0,
+      mensajes: [],
     });
 
     this.formAgregar.reset();
   }
 
+  obtenerMensaje(mensaje: string) {
+    this.mensaje = mensaje;
+  }
+
   votar(participante: Participante) {
-    participante.votos += 1;
-    this.voto.emit(participante);
+    if (participante.mensaje.length > 0) {
+      if (
+        participante.mensajes === null ||
+        participante.mensajes === undefined
+      ) {
+        participante.mensajes = [];
+      }
+
+      participante.mensajes.push(participante.mensaje);
+
+      this.voto.emit(participante);
+    }
+
+    participante.mensaje = '';
+
     this.formBuscador.reset({
       nombre: '',
     });
   }
 
   eliminarParticipante(participante: Participante) {
-    this.eliminar.emit(participante);
-    this.formBuscador.reset({
-      nombre: '',
+    Swal.fire({
+      title: 'Eliminar Participante?',
+      text: `Se eliminará a ${participante.nombre} de la lista`,
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then((resp) => {
+      if (resp.isConfirmed) {
+        this.eliminar.emit(participante);
+
+        this.formBuscador.reset({
+          nombre: '',
+        });
+      }
     });
   }
 }
