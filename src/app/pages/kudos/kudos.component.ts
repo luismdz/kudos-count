@@ -14,6 +14,7 @@ export class KudosComponent implements OnInit, OnDestroy {
   participantes: Participante[] = [];
   datosGrafico = [];
   votacion: Votacion;
+  isLoading = true;
   private kudosSubscription: Subscription;
   // actualizar = true;
   // participantesOriginal = [];
@@ -34,8 +35,10 @@ export class KudosComponent implements OnInit, OnDestroy {
           this.kudosSvc.finalizado$.next(true);
           this.mostrarGanadores(votacion.ganadores);
           this.kudosSubscription.unsubscribe();
+          this.isLoading = false;
         } else {
           this.cargarDatos(votacion);
+          this.isLoading = false;
           // this.kudosSubscription.unsubscribe();
         }
       });
@@ -123,7 +126,7 @@ export class KudosComponent implements OnInit, OnDestroy {
 
     ganadores.forEach((ganador) => {
       htmlTextBody += `
-            <li class="list-group-item border-0 py-1 text-success" style="font-size:1.3rem">
+            <li class="list-group-item border-0 py-1 text-success" style="font-size:1.4rem">
               ${ganador}
             </li>
           `;
