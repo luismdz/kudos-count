@@ -34,20 +34,22 @@ export class SinParticipantesGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const existenParticipantes =
-      this.kudosSvc.participantes && this.kudosSvc.participantes.length > 0;
-
     const sorteoExistente = this.kudosSvc.validarVotacionExistente();
 
     const sub = combineLatest([
       this.kudosSvc.codigoExiste$,
       this.kudosSvc.finalizado$,
+      this.kudosSvc.participantes$,
     ]).pipe(
       map((resp) => {
-        const [ingresoPorCodigo, votacionFinalizada] = resp;
+        const [
+          ingresoPorCodigo,
+          votacionFinalizada,
+          existenParticipantes,
+        ] = resp;
 
         if (
-          existenParticipantes ||
+          existenParticipantes.length > 0 ||
           ingresoPorCodigo ||
           votacionFinalizada ||
           sorteoExistente

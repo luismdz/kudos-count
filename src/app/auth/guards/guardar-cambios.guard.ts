@@ -21,15 +21,16 @@ export class GuardarCambiosGuard implements CanDeactivate<any> {
     if (!finalizado) {
       return Swal.fire({
         icon: 'warning',
-        title: 'Votación sin finalizar',
-        text: 'Tiene una votación activa, seguro que desea cancelar?',
+        title: 'Sorteo sin finalizar',
+        text:
+          'Tiene un sorteo activo, seguro que desea cancelar? Esto eliminará el sorteo actual.',
         showConfirmButton: true,
         confirmButtonText: 'Confirmar',
         showCancelButton: true,
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.kudosSvc.limpiarPropiedades();
+          this.kudosSvc.removerVotacion();
           return true;
         } else {
           return false;

@@ -57,7 +57,7 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
 
     this.formBuscador.valueChanges.subscribe(({ nombre }) => {
       // top 10 mas votados
-      this.participantes = this.filtrarLista(nombre).slice(0, 10);
+      this.participantes = this.filtrarLista(nombre);
     });
   }
 
@@ -65,7 +65,7 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
     this.participantes = changes.participantes.currentValue;
     this.participantesOriginal = this.participantes.slice();
     // Top 10 mas votados
-    this.participantes = this.participantes.slice(0, 10);
+    // this.participantes = this.participantes.slice(0, 5);
   }
 
   ngOnInit(): void {}
@@ -105,25 +105,26 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
     this.formAgregar.reset();
   }
 
-  obtenerMensaje(mensaje: string) {
-    this.mensaje = mensaje;
-  }
+  // obtenerMensaje(mensaje: string) {
+  //   this.mensaje = mensaje;
+  // }
 
   votar(participante: Participante) {
-    if (participante.mensaje.length > 0) {
-      if (
-        participante.mensajes === null ||
-        participante.mensajes === undefined
-      ) {
-        participante.mensajes = [];
-      }
+    // if (participante.mensaje.length > 0) {
+    //   if (
+    //     participante.mensajes === null ||
+    //     participante.mensajes === undefined
+    //   ) {
+    //     participante.mensajes = [];
+    //   }
 
-      participante.mensajes.push(participante.mensaje);
+    //   participante.mensajes.push(participante.mensaje);
 
-      this.voto.emit(participante);
-    }
+    //   this.voto.emit(participante);
+    // }
 
     participante.mensaje = '';
+    this.voto.emit(participante);
 
     this.formBuscador.reset({
       nombre: '',

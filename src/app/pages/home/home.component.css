@@ -18,13 +18,15 @@
 .main-text p {
   font-family: var(--open-sans);
   font-size: 2rem;
-  font-weight: 600;
-  color: #fff;
+  font-weight: 400;
+  color: #000;
   max-width: 500px;
 }
 
 .main-text a {
   margin-right: 2rem;
+  border: 1px solid #000;
+  color: #000;
 }
 
 .selector-container {

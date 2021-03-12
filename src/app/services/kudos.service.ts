@@ -18,8 +18,8 @@ export class KudosService {
   private numbers = '0123456789';
   private votacionCodId = '';
 
-  participantes: Participante[] = [];
-  participantesEnLS: Participante[] = [];
+  private participantes: Participante[] = [];
+  participantes$ = new BehaviorSubject([]);
   codigoExiste$ = new BehaviorSubject(false);
   finalizado$ = new BehaviorSubject(false);
 
@@ -37,6 +37,7 @@ export class KudosService {
   // Agrega lista ingresa al arreglo local y remueve cualquier dato en el LS
   agregarListaParticipantes(participantes: Participante[]) {
     this.participantes = participantes;
+    this.participantes$.next(this.participantes);
     localStorage.removeItem('kudos');
   }
 
@@ -62,10 +63,6 @@ export class KudosService {
     return this.kudosDoc
       .doc(votacionActual.id)
       .update({ participantes: this.participantes });
-  }
-
-  agregarMensaje(participante: Participante, mensaje) {
-    return this.kudosDoc.doc();
   }
 
   // Valida que sorteo exista con el codigo ingresado y devuelve el id
@@ -145,8 +142,8 @@ export class KudosService {
         .pipe(
           map((votacion) => {
             if (votacion.participantes) {
-              const participantes = votacion.participantes?.sort(
-                (a, b) => b.votos - a.votos
+              const participantes = votacion.participantes?.sort((a, b) =>
+                a.nombre > b.nombre ? 1 : -1
               );
 
               this.participantes = participantes.slice();
@@ -170,9 +167,9 @@ export class KudosService {
         })
         .pipe(
           map((votacion) => {
-            if (votacion.participantes) {
-              const participantes = votacion.participantes?.sort(
-                (a, b) => b.votos - a.votos
+            if (votacion.participantes && votacion.participantes.length > 0) {
+              const participantes = votacion.participantes?.sort((a, b) =>
+                a.nombre > b.nombre ? 1 : -1
               );
 
               this.participantes = participantes.slice();
@@ -190,9 +187,9 @@ export class KudosService {
       .valueChanges({ idField: 'id' })
       .pipe(
         map((votacion) => {
-          if (votacion.participantes) {
-            const participantes = votacion.participantes?.sort(
-              (a, b) => b.votos - a.votos
+          if (votacion.participantes && votacion.participantes.length > 0) {
+            const participantes = votacion.participantes?.sort((a, b) =>
+              a.nombre > b.nombre ? 1 : -1
             );
 
             this.participantes = participantes.slice();
@@ -207,7 +204,6 @@ export class KudosService {
   }
 
   // Actualiza votos de los participantes
-  // To do... Agrega mensaje de reconocimiento
   async votar(participante: Participante, { id, codigo }: Votacion) {
     const ref = await this.kudosDoc.ref.where('codigo', '==', codigo).get();
 
@@ -216,11 +212,9 @@ export class KudosService {
     participantes = participantes.map((p) => {
       if (p.nombre.indexOf(participante.nombre) !== -1) {
         p.votos += 1;
-        p.mensajes = participante.mensajes;
+        // p.mensajes = participante.mensajes;
       }
-
-      delete p.mensaje;
-
+      // delete p.mensaje;
       return p;
     });
 
@@ -243,9 +237,10 @@ export class KudosService {
 
   limpiarPropiedades() {
     localStorage.removeItem('kudos');
+    this.participantes = [];
+    this.participantes$.next([]);
     this.codigoExiste$.next(false);
     this.finalizado$.next(false);
-    this.participantes = [];
   }
 
   // Elimina el sorteo y limpia los BehaviorSubject y LocalStorage
