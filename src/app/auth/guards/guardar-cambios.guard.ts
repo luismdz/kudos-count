@@ -8,22 +8,17 @@ import {
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
 import { KudosService } from '../../services/kudos.service';
-import { map, tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GuardarCambiosGuard implements CanDeactivate<unknown> {
+export class GuardarCambiosGuard implements CanDeactivate<any> {
   constructor(private kudosSvc: KudosService) {}
 
-  canDeactivate(
-    component: any,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState?: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.kudosSvc.finalizado$.value) {
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    const finalizado = this.kudosSvc.finalizado$.value;
+
+    if (!finalizado) {
       return Swal.fire({
         icon: 'warning',
         title: 'Votación sin finalizar',
@@ -34,7 +29,7 @@ export class GuardarCambiosGuard implements CanDeactivate<unknown> {
         cancelButtonText: 'Cancelar',
       }).then((result) => {
         if (result.isConfirmed) {
-          this.kudosSvc.removerVotacion();
+          this.kudosSvc.limpiarPropiedades();
           return true;
         } else {
           return false;

@@ -12,6 +12,13 @@
   max-width: 350px;
 }
 
+textarea {
+  max-height: 200px;
+  min-height: 60px;
+  min-width: 135px;
+  width: 100%;
+}
+
 /* .listado ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

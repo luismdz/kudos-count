@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { KudosComponent } from './pages/kudos/kudos.component';
 import { environment } from '../environments/environment';
 import { AuthModule } from './auth/auth.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, KudosComponent],
@@ -25,6 +26,8 @@ import { AuthModule } from './auth/auth.module';
       'angular-auth-firebase'
     ),
     AngularFirestoreModule,
+    ReactiveFormsModule,
+    FormsModule,
     AuthModule,
   ],
   providers: [],

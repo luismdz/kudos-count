@@ -1,5 +1,8 @@
 export interface Participante {
+  id?: number;
   nombre: string;
+  mensaje?: string;
+  mensajes?: string[];
   votos?: number;
 }
 
@@ -13,8 +16,9 @@ export interface Proyecto {
 
 export interface Votacion {
   id?: string;
-  codigo?: number;
-  proyectoId?: string;
+  codigo?: string;
+  finalizada?: boolean;
   participantes?: Participante[];
   fecha?: Date | number;
+  ganadores?: string[];
 }

@@ -13,11 +13,11 @@ const routes: Routes = [
     canActivate: [SinParticipantesGuard],
     canDeactivate: [GuardarCambiosGuard],
   },
-  {
-    path: 'auth',
-    loadChildren: () =>
-      import('./auth/auth-routing.module').then((m) => m.AuthRoutingModule),
-  },
+  // {
+  //   path: 'auth',
+  //   loadChildren: () =>
+  //     import('./auth/auth-routing.module').then((m) => m.AuthRoutingModule),
+  // },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
 ];
 
