@@ -15,8 +15,8 @@ export class KudosComponent implements OnInit, OnDestroy {
   datosGrafico = [];
   votacion: Votacion;
   private kudosSubscription: Subscription;
-  actualizar = true;
-  participantesOriginal = [];
+  // actualizar = true;
+  // participantesOriginal = [];
 
   private toast = Swal.mixin({
     toast: true,
@@ -50,22 +50,22 @@ export class KudosComponent implements OnInit, OnDestroy {
     if (votacion && votacion !== undefined && votacion.participantes) {
       this.votacion = votacion;
 
-      if (this.actualizar) {
-        this.participantes = this.votacion.participantes;
-        this.actualizar = false;
-      }
+      // if (this.actualizar) {
+      //   this.actualizar = false;
+      // }
+      this.participantes = this.votacion.participantes;
 
-      this.datosGrafico = this.votacion.participantes.map(
-        ({ nombre, votos }) => ({
+      this.datosGrafico = this.votacion.participantes
+        .map(({ nombre, votos }) => ({
           name: nombre,
           value: votos,
-        })
-      );
+        }))
+        .sort((a, b) => b.value - a.value);
     }
   }
 
   recibirNuevoParticipante(nuevoParticipante: Participante) {
-    this.actualizar = true;
+    // this.actualizar = true;
 
     this.kudosSvc
       .agregarParticipante(nuevoParticipante, this.votacion)
@@ -78,7 +78,7 @@ export class KudosComponent implements OnInit, OnDestroy {
   }
 
   eliminarParticipante(participante: Participante) {
-    this.actualizar = true;
+    // this.actualizar = true;
 
     this.kudosSvc.eliminarParticipante(participante, this.votacion).then(() =>
       this.toast.fire({
@@ -114,7 +114,7 @@ export class KudosComponent implements OnInit, OnDestroy {
 
   private mostrarGanadores(ganadores: string[]) {
     const htmlTextTitle = `
-          <p class="mt-3 mb-2">
+          <p class="mt-0 mb-2 font-weigth-bold" style="font-size:2rem">
             <strong>${ganadores.length > 1 ? 'Ganadores:' : 'Ganador:'}</strong>
           </p>
         `;
@@ -123,7 +123,7 @@ export class KudosComponent implements OnInit, OnDestroy {
 
     ganadores.forEach((ganador) => {
       htmlTextBody += `
-            <li class="list-group-item border-0 py-1 text-success">
+            <li class="list-group-item border-0 py-1 text-success" style="font-size:1.3rem">
               ${ganador}
             </li>
           `;
@@ -131,7 +131,7 @@ export class KudosComponent implements OnInit, OnDestroy {
 
     Swal.fire({
       icon: 'success',
-      title: 'Votación finalizada!',
+      // title: 'Votación finalizada!',
       html: `
             ${htmlTextTitle}
             <ul class="list-group mb-1">
