@@ -100,10 +100,35 @@ export class KudosComponent implements OnInit, OnDestroy {
     );
   }
 
+  eliminarVoto(participante: Participante) {
+    this.kudosSvc.eliminarVoto(participante, this.votacion).then(() =>
+      this.toast.fire({
+        icon: 'error',
+        title: 'Voto eliminado!',
+      })
+    );
+  }
+
   finalizarVotacion() {
+    const maxVoto = Math.max(
+      ...this.votacion.participantes.map((x) => x.votos)
+    );
+
+    if (maxVoto <= 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Sorteo sin votos',
+        text:
+          'Debe emitir por lo menos un (1) kudo para finalizar el sorteo actual',
+      }).then();
+
+      return;
+    }
+
     Swal.fire({
-      title: 'Finalizar votacion?',
-      text: 'Seguro que desea terminar la votacion?',
+      icon: 'question',
+      title: 'Finalizar sorteo?',
+      text: 'Seguro que desea terminar el sorteo actual?',
       showConfirmButton: true,
       confirmButtonText: 'Confirmar',
       showCancelButton: true,

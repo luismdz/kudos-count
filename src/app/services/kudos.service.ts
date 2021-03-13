@@ -203,7 +203,7 @@ export class KudosService {
       );
   }
 
-  // Actualiza votos de los participantes
+  // Actualiza votos de los participantes agregandole + 1
   async votar(participante: Participante, { id, codigo }: Votacion) {
     const ref = await this.kudosDoc.ref.where('codigo', '==', codigo).get();
 
@@ -215,6 +215,22 @@ export class KudosService {
         // p.mensajes = participante.mensajes;
       }
       // delete p.mensaje;
+      return p;
+    });
+
+    return this.kudosDoc.doc(id).update({ participantes });
+  }
+
+  // Actualiza votos de los participantes reduciendo - 1
+  async eliminarVoto(participante: Participante, { id, codigo }: Votacion) {
+    const ref = await this.kudosDoc.ref.where('codigo', '==', codigo).get();
+
+    let { participantes } = ref.docs[0].data();
+
+    participantes = participantes.map((p) => {
+      if (p.nombre.indexOf(participante.nombre) !== -1) {
+        p.votos -= 1;
+      }
       return p;
     });
 

@@ -8,6 +8,7 @@ import { GraficoBarrasHorizontalComponent } from './grafico-barras-horizontal/gr
 import { NavbarComponent } from './navbar/navbar.component';
 import { SelectorParticipantesComponent } from './selector-participantes/selector-participantes.component';
 import { ListadoParticipantesComponent } from './listado-participantes/listado-participantes.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ListadoParticipantesComponent } from './listado-participantes/listado-p
     NavbarComponent,
     SelectorParticipantesComponent,
     ListadoParticipantesComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { ListadoParticipantesComponent } from './listado-participantes/listado-p
     NavbarComponent,
     SelectorParticipantesComponent,
     ListadoParticipantesComponent,
+    FooterComponent,
   ],
 })
 export class ComponentsModule {}
