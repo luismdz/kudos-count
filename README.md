@@ -1,6 +1,6 @@
 # Kudos Count App
 
-Proyecto creado para el conteo de Kudos de los participantes ingresados.
+Proyecto creado para el conteo de Kudos de los participantes ingresados mostrando los votos o reconocimientos en un diagrama de barras horizontales.
 
 La aplicación se conforma por lo siguiente:
 
