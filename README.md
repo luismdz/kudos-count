@@ -8,6 +8,6 @@ La aplicación se conforma por lo siguiente:
 - Firebase
 - Ngx-charts
 - SweetAlert2
-- Bootstrap + Fontawsome
+- Bootstrap + Font Awesome
 
 [Demo de la Aplicación](https://kudos-count.netlify.app)
