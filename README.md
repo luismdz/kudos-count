@@ -6,9 +6,9 @@ La aplicación se conforma por lo siguiente:
 
 - Angular 11
 - Firebase
+- Ngx-charts
 - SweetAlert2
 - Bootstrap
 - Fontawsome
-- Netlify
 
 [Demo de la Aplicación](https://kudos-count.netlify.app)
