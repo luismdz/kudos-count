@@ -120,7 +120,7 @@ svg {
 @media (max-width:1100px) {
 
   .wave-container {
-    height: 35vh;
+    height: 20vh;
   }
 
 }
@@ -142,7 +142,7 @@ svg {
 @media (max-width:780px) {
 
   .wave-container {
-    height: 40vh;
+    height: 35vh;
     min-height: 400px;
   }
 

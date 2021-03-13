@@ -4,5 +4,6 @@
 }
 
 .main-container {
-  padding-bottom: 70px;
+  /* padding-bottom: 70px; */
+  min-height: calc(100% - 67px);
 }
