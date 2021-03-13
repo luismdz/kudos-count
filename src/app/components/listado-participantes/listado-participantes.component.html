@@ -1,7 +1,8 @@
 <div class="buscador mb-4">
 
   <form [formGroup]="formAgregar"
-    (ngSubmit)="agregarParticipante()">
+    (ngSubmit)="agregarParticipante()"
+    autocomplete="off">
 
     <div class="form-group">
       <label for="participante">Agregar Participante</label>
@@ -38,7 +39,7 @@
 </div>
 
 <div class="listado">
-  <h3 class="font-weight-light">Participantes</h3>
+  <h4 class="font-weight-light">Realizar votación</h4>
   <ul class="list-group w-100 mt-3"
     *ngIf="participantes.length > 0">
 
@@ -55,19 +56,19 @@
           [(ngModel)]="participante.mensaje"></textarea>
       </div> -->
 
-      <div class="act d-flex justify-content-end ml-2 mt-1">
+      <div class="act d-flex justify-content-end ml-2">
         <button class="btn btn-primary"
           type="button"
           title="Dar kudo"
           (click)="votar(participante)">
-          <!-- <i class="far fa-thumbs-up"></i> -->
-          Dar Kudo
+          <i class="far fa-thumbs-up"></i>
+          <!-- Dar Kudo -->
         </button>
 
         <button class="btn btn-danger ml-2"
           type="button"
-          title="Eliminar de la lista"
-          (click)="eliminarParticipante(participante)">
+          title="Eliminar voto"
+          (click)="onEliminarVoto(participante)">
           <i class="far fa-trash-alt"></i>
         </button>
       </div>

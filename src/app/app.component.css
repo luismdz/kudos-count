@@ -1,1 +1,8 @@
+.wrapper {
+  height: 100vh;
+  position: relative;
+}
 
+.main-container {
+  padding-bottom: 70px;
+}

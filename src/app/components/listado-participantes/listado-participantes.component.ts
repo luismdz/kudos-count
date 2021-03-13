@@ -16,6 +16,8 @@ import {
 } from '@angular/forms';
 import { firstLetterToUpperCase } from '../../utilidades';
 import Swal from 'sweetalert2';
+import { debounceTime, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-listado-participantes',
@@ -27,8 +29,11 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
   @Output() agregarNuevo = new EventEmitter<Participante>();
   @Output() voto = new EventEmitter<Participante>();
   @Output() eliminar = new EventEmitter<Participante>();
+  @Output() eliminarVoto = new EventEmitter<Participante>();
 
   private participantesOriginal = [];
+  private debouncer = new Subject<string>();
+
   mensajes = '';
   formBuscador: FormGroup;
   formAgregar: FormGroup;
@@ -110,24 +115,32 @@ export class ListadoParticipantesComponent implements OnInit, OnChanges {
   // }
 
   votar(participante: Participante) {
-    // if (participante.mensaje.length > 0) {
-    //   if (
-    //     participante.mensajes === null ||
-    //     participante.mensajes === undefined
-    //   ) {
-    //     participante.mensajes = [];
-    //   }
-
-    //   participante.mensajes.push(participante.mensaje);
-
-    //   this.voto.emit(participante);
-    // }
-
-    participante.mensaje = '';
+    // participante.mensaje = '';
     this.voto.emit(participante);
-
     this.formBuscador.reset({
       nombre: '',
+    });
+  }
+
+  onEliminarVoto(participante: Participante) {
+    if (participante.votos === 0) {
+      return;
+    }
+
+    Swal.fire({
+      title: 'Eliminar voto?',
+      text: `Se eliminará un voto a ${participante.nombre}`,
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+    }).then((resp) => {
+      if (resp.isConfirmed) {
+        this.eliminarVoto.emit(participante);
+
+        this.formBuscador.reset({
+          nombre: '',
+        });
+      }
     });
   }
 

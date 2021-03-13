@@ -22,6 +22,7 @@
       <app-listado-participantes [participantes]="participantes"
         (agregarNuevo)="recibirNuevoParticipante($event)"
         (eliminar)="eliminarParticipante($event)"
+        (eliminarVoto)="eliminarVoto($event)"
         (voto)="recibirVoto($event)"></app-listado-participantes>
     </div>
 
@@ -32,8 +33,9 @@
       <div class="finalizar">
         <button class="btn btn-outline-success btn-block my-5 w-100"
           type="button"
+          title="Finalizar sorteo y mostrar ganador"
           (click)="finalizarVotacion()">
-          Finalizar
+          Finalizar sorteo
         </button>
       </div>
     </div>
